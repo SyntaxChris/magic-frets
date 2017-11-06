@@ -36,15 +36,16 @@ class GuitarString extends Component {
       fretPosition: 0
     }
     this.fretPositionCoordinates = [
-      'L5,1',
-      'L10,1',
-      'L15,1',
-      'L20,1',
-      'L25,1',
-      'L30,1',
-      'L35,1',
-      'L40,1',
-      'L45,1',
+      'Q50',
+      'L4,1 Q54',
+      'L7.4,1 Q57.4',
+      'L10.7,1 Q60.7',
+      'L13.7,1 Q63.7',
+      'L16.7,1 Q66.7',
+      'L19.2,1 Q69.2',
+      'L22,1 Q72',
+      'L24.4,1 Q74.4',
+      'L26.7,1 Q76.7',
       'L50,1',
       'L55,1',
       'L60,1',
@@ -79,8 +80,9 @@ class GuitarString extends Component {
 
         if (lastTime != null) angle += (time - lastTime) * frequency
         
-        const y = 1 + (Math.sin(angle) * (gauge/0.25))
-        const fretPositionPath = `M0,1 L5,1 Q50,${y} 100,1`
+        // const y = 1 + (Math.sin(angle) * (gauge/0.25))
+        const y = 1 + (Math.sin(angle) * (12))
+        const fretPositionPath = `M0,1 L26.7,1 Q76.7,${y} 100,1`
 
         lastTime = time
         
