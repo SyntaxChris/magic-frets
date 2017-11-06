@@ -5,8 +5,8 @@ import './HomeView.scss'
 export const FretPad = ({ fretIndex }) => {
   const fretMark = fretIndex + 1
   const Marker = () => {
-    const singleDot = [3, 5, 7, 9]
-    const doubleDot = [12]
+    const singleDot = [3, 5, 7, 9, 15, 17, 19, 21]
+    const doubleDot = [12, 24]
 
     if (singleDot.includes(fretMark)) {
       return <div className='dot' />
@@ -32,8 +32,24 @@ class GuitarString extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: this.props.active
+      active: this.props.active,
+      fretPosition: 0
     }
+    this.fretPositionCoordinates = [
+      'L5,1',
+      'L10,1',
+      'L15,1',
+      'L20,1',
+      'L25,1',
+      'L30,1',
+      'L35,1',
+      'L40,1',
+      'L45,1',
+      'L50,1',
+      'L55,1',
+      'L60,1',
+      'L65,1'
+    ]
   }
 
   componentDidMount() {
@@ -44,28 +60,32 @@ class GuitarString extends Component {
   }
 
 
-  activateString () {
+  activateString (fretIndex) {
     const { active, gauge, stringIndex } = this.props
-    const { guitarString } = this
-    const setState = this.setState
     let angle = 0
     let lastTime = null
     let mute = true 
 
-    this.setState({ active: true }, () => {
+    this.setState({
+      active: true,
+      fretPosition: fretIndex + 1
+    }, () => {
+      const { fretIndex } = this.state
+
       function animate (time) {
-        const frequency = 0.16/(stringIndex + 1)
+        const frequency = 0.25/(stringIndex + 1)
         const activeString = document.getElementById(`string-${stringIndex}`)
         const mutedString = document.getElementById(`string-mute-${stringIndex}`)
 
         if (lastTime != null) angle += (time - lastTime) * frequency
         
-        lastTime = time
-
         const y = 1 + (Math.sin(angle) * (gauge/0.25))
+        const fretPositionPath = `M0,1 L5,1 Q50,${y} 100,1`
 
+        lastTime = time
+        
         if (activeString) {
-          activeString.setAttribute('d', `M0,1 Q50,${y} 100,1`)
+          activeString.setAttribute('d', fretPositionPath)
         } else if (mutedString) {
           mutedString.setAttribute('d', 'M 0,1 Q50,1 100,1')
         }
@@ -84,14 +104,20 @@ class GuitarString extends Component {
   render () {
     const { frets, label, stringIndex } = this.props 
 
-    return <div className='string'>
+    return <div
+      className='string'
+      onMouseLeave={() => this.muteString()}
+    >
       <div className='label'>{label}</div>
-      <div
-        className='fretted-sections'
-        onMouseDown={() => this.activateString()}
-        onMouseUp={() => this.muteString()}
-      >
-        {_.times(frets, (i) => <div className='fret-string-section' key={i.toString()}/>)}
+      <div className='fretted-sections'>
+        {_.times(frets, (i) => {
+          return <div
+            className='fret-string-section'
+            key={i.toString()}
+            onMouseDown={() => this.activateString(i)}
+            onMouseUp={() => this.muteString()}
+          />
+        })}
       </div>
       <svg
         preserveAspectRatio='none'
@@ -102,14 +128,14 @@ class GuitarString extends Component {
             id={`string-${stringIndex}`}
             d='M 0,1 Q50,1 100,1'
             strokeWidth={this.props.gauge}
-            stroke='#b7b7b7'
+            stroke='rgba(178, 173, 148, 0.6)'
             fill='none'
           />
           : <path
             id={`string-mute-${stringIndex}`}
             d='M 0,1 Q50,1 100,1'
             strokeWidth={this.props.gauge}
-            stroke='#b7b7b7'
+            stroke='rgba(178, 173, 148, 0.6)'
             fill='none'
           />}
       </svg>
@@ -141,6 +167,7 @@ export const Fretboard = ({ frets, stringProps }) => <div className='fretboard'>
       />
     })}
   </div>
+  <div className='fretboard-butt' />
 </div>
 
 export const HomeView = () => {
@@ -176,7 +203,7 @@ export const HomeView = () => {
   }]
 
   return <div className='home-view'>
-    <Fretboard frets={13} stringProps={stringProps} />
+    <Fretboard frets={24} stringProps={stringProps} />
   </div>
 }
 
