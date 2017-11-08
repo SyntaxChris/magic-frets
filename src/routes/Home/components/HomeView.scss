@@ -110,8 +110,37 @@
       height: 100%;
       .string {
         position: relative;
-        height: 16.66%;
+        // height: 16.66%;
+        height: 50%;
         width: 100%;
+        &:nth-child(1) {
+          top: -0%;
+          // background-color: #bae0cd;
+        }
+        &:nth-child(2) {
+          top: -39%;
+          // background-color: #dfb9b9;
+        }
+        &:nth-child(3) {
+          top: -84%;
+          // visibility: hidden;
+          // background-color: #dfd6b9;
+        }
+        &:nth-child(4) {
+          top: -122%;
+          // visibility: hidden;
+          // background-color: #bae0cd;
+        }
+        &:nth-child(5) {
+          top: -158%;
+          // visibility: hidden;
+          // background-color: #b9b9df;
+        }
+        &:nth-child(6) {
+          bottom: 200%;
+          // visibility: hidden;
+          // background-color: #ccb9df;
+        }
         svg {
           position: absolute; 
           width: 100%;
@@ -135,14 +164,13 @@
           flex-direction: row;
           .fret-string-section {
             height: 100%;
-            width: 4.166%;
             z-index: 4;
             &:nth-child(1){ width: 7.48% }
             &:nth-child(2){ width: 7.06% }
             &:nth-child(3){ width: 6.67% }
             &:nth-child(4){ width: 6.29% }
             &:nth-child(5){ width: 5.94% }
-            &:nth-child(6){ width: 5.61% }
+            &:nth-child(6){ width: 5.61%;}
             &:nth-child(7){ width: 5.29% }
             &:nth-child(8){ width: 4.99% }
             &:nth-child(9){ width: 4.71% }
@@ -163,7 +191,7 @@
             &:nth-child(24){ width: 1.98% }
             cursor: pointer;
             &:hover {
-              background-color: rgba(186, 224, 205, 0.5)
+              background-color: rgba(186, 224, 205, 0.5);
             }
           }
         }

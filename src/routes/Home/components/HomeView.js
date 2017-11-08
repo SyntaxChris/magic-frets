@@ -1,5 +1,7 @@
 import _ from 'lodash'
-import React, { Component } from 'react'
+import GuitarString from '../../../components/GuitarString'
+import React from 'react'
+import { Component } from 'react'
 import './HomeView.scss'
 
 export const FretPad = ({ fretIndex }) => {
@@ -28,132 +30,6 @@ export const FretPad = ({ fretIndex }) => {
   </div>
 }
 
-class GuitarString extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: this.props.active,
-      fretPosition: 0
-    }
-    this.fretPositionCoordinates = [
-      'Q50',
-      'L4,1 Q54',
-      'L7.4,1 Q57.4',
-      'L10.7,1 Q60.7',
-      'L13.7,1 Q63.7',
-      'L16.7,1 Q66.7',
-      'L19.2,1 Q69.2',
-      'L22,1 Q72',
-      'L24.4,1 Q74.4',
-      'L26.7,1 Q76.7',
-      'L50,1',
-      'L55,1',
-      'L60,1',
-      'L65,1'
-    ]
-  }
-
-  componentDidMount() {
-    const { stringIndex } = this.props
-    if (this.props.active) return this.activateString()
-
-    return this.setState({ mute: true })
-  }
-
-
-  activateString (fretIndex) {
-    const { active, gauge, stringIndex } = this.props
-    let angle = 0
-    let lastTime = null
-    let mute = true 
-
-    this.setState({
-      active: true,
-      fretPosition: fretIndex + 1
-    }, () => {
-      const { fretIndex } = this.state
-
-      function animate (time) {
-        const frequency = 0.25/(stringIndex + 1)
-        const activeString = document.getElementById(`string-${stringIndex}`)
-        const mutedString = document.getElementById(`string-mute-${stringIndex}`)
-
-        if (lastTime != null) angle += (time - lastTime) * frequency
-        
-        // const y = 1 + (Math.sin(angle) * (gauge/0.25))
-        const y = 1 + (Math.sin(angle) * (12))
-        const fretPositionPath = `M0,1 L26.7,1 Q76.7,${y} 100,1`
-
-        lastTime = time
-        
-        if (activeString) {
-          activeString.setAttribute('d', fretPositionPath)
-        } else if (mutedString) {
-          mutedString.setAttribute('d', 'M 0,1 Q50,1 100,1')
-        }
-
-        return requestAnimationFrame(animate)
-      }
-
-      animate()
-    })
-  }
-
-  muteString () {
-    this.setState({ active: false })
-  }
-
-  render () {
-    const { frets, label, stringIndex } = this.props 
-
-    return <div
-      className='string'
-      onMouseLeave={() => this.muteString()}
-    >
-      <div className='label'>{label}</div>
-      <div className='fretted-sections'>
-        {_.times(frets, (i) => {
-          return <div
-            className='fret-string-section'
-            key={i.toString()}
-            onMouseDown={() => this.activateString(i)}
-            onMouseUp={() => this.muteString()}
-          />
-        })}
-      </div>
-      <svg
-        preserveAspectRatio='none'
-        viewBox='0 0 50 2'
-      > 
-        {this.state.active
-          ? <path
-            id={`string-${stringIndex}`}
-            d='M 0,1 Q50,1 100,1'
-            strokeWidth={this.props.gauge}
-            stroke='rgba(178, 173, 148, 0.6)'
-            fill='none'
-          />
-          : <path
-            id={`string-mute-${stringIndex}`}
-            d='M 0,1 Q50,1 100,1'
-            strokeWidth={this.props.gauge}
-            stroke='rgba(178, 173, 148, 0.6)'
-            fill='none'
-          />}
-      </svg>
-    </div>
-  }
-}
-
-
-
-
-
-
-
-
-
-
 export const Fretboard = ({ frets, stringProps }) => <div className='fretboard'>
   <div className='nut' />
   <div className='frets'>{_.times(frets, (i) => <FretPad key={i.toString()} fretIndex={i} />)}</div>
@@ -175,32 +51,32 @@ export const Fretboard = ({ frets, stringProps }) => <div className='fretboard'>
 export const HomeView = () => {
   const stringProps = [{
     active: false,
-    gauge: 0.15,
+    gauge: 0.07,
     label: 'e'
   },
   {
     active: false,
-    gauge: 0.17,
+    gauge: 0.09,
     label: 'B'
   },
   {
     active: false,
-    gauge: 0.19,
+    gauge: 0.10,
     label: 'G'
   },
   {
     active: false,
-    gauge: 0.21,
+    gauge: 0.11,
     label: 'D'
   },
   {
     active: false,
-    gauge: 0.23,
+    gauge: 0.12,
     label: 'A'
   },
   {
     active: false,
-    gauge: 0.25,
+    gauge: 0.13,
     label: 'E'
   }]
 
