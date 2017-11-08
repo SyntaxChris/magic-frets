@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
+import './guitarStrings.scss'
 
 const restingPositions = [
   'M0,0.5 100,0.5',
@@ -116,7 +117,6 @@ class GuitarString extends Component {
       className='string'
       onMouseLeave={() => this.muteString()}
     >
-      <div className='label'>{label}</div>
       <div className='fretted-sections'>
         {_.times(frets, (i) => {
           return <div
