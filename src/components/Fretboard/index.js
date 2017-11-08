@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import FretboardMatrix from '../FretboardMatrix'
 import GuitarString from '../GuitarString'
+import React from 'react'
 import './fretboard.scss'
 
 const stringProps = [
@@ -61,32 +62,21 @@ export const FretPad = ({ fretIndex }) => {
   </div>
 }
 
-class FretMatrix extends Component {
-  render () {
-    const { frets, strings } = this.props
 
-    return <div className='fret-matrix'>
-      {_.times(strings, (stringIndex) => {
-        return <div className='matrix-string' key={stringIndex.toString()}>
-          {_.times(frets, (fretIndex) => {
-            return <div
-              className='matrix-fret'
-              key={fretIndex.toString()}
-              // onClick={()}
-            />
-          })}
-        </div>
-      })}
-    </div>
-  }
-}
 
 export const Fretboard = ({ frets, strings }) => <div className='fretboard'>
-  <FretMatrix
+  <div className='string-markers'>
+    <div className='string-marker one' />
+    <div className='string-marker two' />
+    <div className='string-marker three' />
+    <div className='string-marker four' />
+    <div className='string-marker five' />
+    <div className='string-marker six' />
+  </div>
+  <FretboardMatrix
     frets={frets}
     strings={strings}
   />
-  
   <div className='nut' />
   <div className='frets'>{_.times(frets, (i) => <FretPad key={i.toString()} fretIndex={i} />)}</div>
   <div className='strings'>

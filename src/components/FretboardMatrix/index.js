@@ -1,0 +1,103 @@
+import Draggable from 'react-draggable'
+import React, { Component } from 'react'
+import { WindowResizeListener } from 'react-window-resize-listener'
+import './fretboardMatrix.scss'
+
+class FretboardMatrix extends Component {
+  constructor (props) {
+    super(props)
+    
+    this.state = {
+      defaultPosition: []
+    }
+  }
+
+  componentDidMount() {
+    // this.setState({
+    //   defaultPosition: this.locateStringMarkers()
+    // })
+    console.log('STATE:::', this.state)
+  }
+
+  onDrag (e) {
+    console.log('HANDLE DRAG', e)
+  }
+
+  onStart (e) {
+    // console.log(this.state)
+    // console.log(e)
+    // this.setState({ activeDrags: ++this.state.activeDrags })
+  }
+
+  onStop (e) {
+    console.log(this.state)
+    // this.setState({ activeDrags: --this.state.activeDrags })
+  }
+
+  defaultPosition (stringIndex) {
+    return [
+      {x: 0, y: 0},
+      {x: 0, y: 9},
+      {x: 0, y: 33},
+      {x: 0, y: 20},
+      {x: 0, y: 25},
+      {x: 0, y: 30}
+    ][stringIndex]
+  }
+
+  locateStringMarkers () {
+    const markers = document.getElementsByClassName('string-marker')
+    const offsetTops = Array.prototype.map.call(markers, (marker, i) => {
+      if (i === 0) return { x: 0, y: marker.offsetTop - 10 }
+      if (i === 1) return { x: 0, y: marker.offsetTop - 35 }
+      if (i === 2) return { x: 0, y: marker.offsetTop - 44 }
+      if (i === 3) return { x: 0, y: marker.offsetTop - 92 }
+      if (i === 4) return { x: 0, y: marker.offsetTop - 35 }
+      if (i === 5) return { x: 0, y: marker.offsetTop - 35 }
+    })
+
+    this.setState({ defaultPosition: offsetTops })
+  }
+
+  render () {
+    const { frets, strings } = this.props
+    const { deltaPosition, controlledPosition } = this.state
+    const dragHandlers = {
+      onStart: this.onStart.bind(this),
+      onStop: this.onStop.bind(this),
+      onDrag: this.onDrag.bind(this)
+    }
+    console.log(this.state)
+    return <div className='fret-matrix'>
+      <WindowResizeListener onResize={(windowSize) => this.locateStringMarkers(windowSize)}/>
+      {_.times(6, (stringIndex) => {
+        return <div className='matrix-string' key={stringIndex.toString()}>
+          {_.times(frets, (fretIndex) => {
+            return <Draggable
+              axis='y' {...dragHandlers}
+              bounds='parent'
+              defaultPosition={this.defaultPosition(stringIndex)}
+              key={fretIndex.toString()}
+            >
+              <div className='matrix-fret' />
+            </Draggable>
+          })}
+        </div>
+      })}
+{/*      <div className='matrix-string'>
+        <WindowResizeListener onResize={windowSize => {
+          console.log('Window height', windowSize.windowHeight)
+          console.log('Window width', windowSize.windowWidth)
+        }}/>
+        <Draggable
+          axis='y' {...dragHandlers}
+          bounds='parent'
+        >
+          <div className='matrix-fret' />
+        </Draggable>
+      </div>*/}
+    </div>
+  }
+}
+
+export default FretboardMatrix
