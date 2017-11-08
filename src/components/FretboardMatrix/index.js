@@ -8,15 +8,8 @@ class FretboardMatrix extends Component {
     super(props)
     
     this.state = {
-      defaultPosition: []
+      defaultPositions: []
     }
-  }
-
-  componentDidMount() {
-    // this.setState({
-    //   defaultPosition: this.locateStringMarkers()
-    // })
-    console.log('STATE:::', this.state)
   }
 
   onDrag (e) {
@@ -34,6 +27,11 @@ class FretboardMatrix extends Component {
     // this.setState({ activeDrags: --this.state.activeDrags })
   }
 
+  defaultStringPositions(stringIndex) {
+    if(this.state.defaultPositions.length > 0) return this.state.defaultPositions[stringIndex]
+    return {x: 0, y: 0}
+  }
+
   defaultPosition (stringIndex) {
     return [
       {x: 0, y: 0},
@@ -45,8 +43,9 @@ class FretboardMatrix extends Component {
     ][stringIndex]
   }
 
-  locateStringMarkers () {
+  locateStringMarkers (windowSize) {
     const markers = document.getElementsByClassName('string-marker')
+    if (windowSize) console.log('Window width', windowSize.windowWidth)
     const offsetTops = Array.prototype.map.call(markers, (marker, i) => {
       if (i === 0) return { x: 0, y: marker.offsetTop - 10 }
       if (i === 1) return { x: 0, y: marker.offsetTop - 35 }
@@ -56,27 +55,28 @@ class FretboardMatrix extends Component {
       if (i === 5) return { x: 0, y: marker.offsetTop - 35 }
     })
 
-    this.setState({ defaultPosition: offsetTops })
+    this.setState({ defaultPositions: offsetTops })
   }
 
   render () {
     const { frets, strings } = this.props
-    const { deltaPosition, controlledPosition } = this.state
+    const { defaultPosition } = this.state
     const dragHandlers = {
       onStart: this.onStart.bind(this),
       onStop: this.onStop.bind(this),
       onDrag: this.onDrag.bind(this)
     }
-    console.log(this.state)
+
     return <div className='fret-matrix'>
       <WindowResizeListener onResize={(windowSize) => this.locateStringMarkers(windowSize)}/>
-      {_.times(6, (stringIndex) => {
+      {_.times(3, (stringIndex) => {
+        console.log(this.defaultStringPositions(stringIndex))
         return <div className='matrix-string' key={stringIndex.toString()}>
           {_.times(frets, (fretIndex) => {
             return <Draggable
               axis='y' {...dragHandlers}
               bounds='parent'
-              defaultPosition={this.defaultPosition(stringIndex)}
+              position={this.defaultStringPositions(stringIndex)}
               key={fretIndex.toString()}
             >
               <div className='matrix-fret' />
