@@ -37,6 +37,31 @@
         z-index: 4;
       } 
     }
+    &:nth-child(4) {
+      // border: 1px solid #dfb9b9;
+      top: -122%;
+      .matrix-fret {
+        background-color: #b9cfdf;
+        z-index: 4;
+      } 
+    }
+    &:nth-child(5) {
+      // border: 1px solid #dfb9b9;
+      top: -158%;
+      .matrix-fret {
+        background-color: #badfb9;
+        z-index: 4;
+      } 
+    }
+    &:nth-child(6) {
+      // border: 1px solid #dfb9b9;
+      top: -196%;
+      .matrix-fret {
+        background-color: #cdb9df;
+        top: 0;
+        z-index: 4;
+      } 
+    }
     .matrix-fret {
       height: 33.33%;
       opacity: 0.8;

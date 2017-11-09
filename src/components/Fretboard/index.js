@@ -36,7 +36,7 @@ const stringProps = [
   }
 ]
 
-export const FretPad = ({ fretIndex }) => {
+const FretPad = ({ fretIndex }) => {
   const fretMark = fretIndex + 1
   const Marker = () => {
     const singleDot = [3, 5, 7, 9, 15, 17, 19, 21]
@@ -62,21 +62,20 @@ export const FretPad = ({ fretIndex }) => {
   </div>
 }
 
+const FretPositionMarkers = () => <div className='string-markers'>
+  <div className='string-marker one' />
+  <div className='string-marker two' />
+  <div className='string-marker three' />
+  <div className='string-marker four' />
+  <div className='string-marker five' />
+  <div className='string-marker six' />
+</div>
+
 
 
 export const Fretboard = ({ frets, strings }) => <div className='fretboard'>
-  <div className='string-markers'>
-    <div className='string-marker one' />
-    <div className='string-marker two' />
-    <div className='string-marker three' />
-    <div className='string-marker four' />
-    <div className='string-marker five' />
-    <div className='string-marker six' />
-  </div>
-  <FretboardMatrix
-    frets={frets}
-    strings={strings}
-  />
+  <FretPositionMarkers />
+  <FretboardMatrix frets={frets} strings={strings} />
   <div className='nut' />
   <div className='frets'>{_.times(frets, (i) => <FretPad key={i.toString()} fretIndex={i} />)}</div>
   <div className='strings'>

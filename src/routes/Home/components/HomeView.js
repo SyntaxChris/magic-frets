@@ -6,7 +6,9 @@ import './HomeView.scss'
 
 export const HomeView = () => {
   return <div className='home-view'>
-    <Fretboard frets={24} strings={6} />
+    <div className='view-box'>
+      <Fretboard frets={24} strings={6} />
+    </div>
   </div>
 }
 

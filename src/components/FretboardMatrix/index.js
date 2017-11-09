@@ -47,12 +47,12 @@ class FretboardMatrix extends Component {
     const markers = document.getElementsByClassName('string-marker')
     if (windowSize) console.log('Window width', windowSize.windowWidth)
     const offsetTops = Array.prototype.map.call(markers, (marker, i) => {
-      if (i === 0) return { x: 0, y: marker.offsetTop - 10 }
-      if (i === 1) return { x: 0, y: marker.offsetTop - 35 }
-      if (i === 2) return { x: 0, y: marker.offsetTop - 44 }
-      if (i === 3) return { x: 0, y: marker.offsetTop - 92 }
-      if (i === 4) return { x: 0, y: marker.offsetTop - 35 }
-      if (i === 5) return { x: 0, y: marker.offsetTop - 35 }
+      if (i === 0) return { x: 0, y: marker.offsetTop - 9 * (windowSize.windowWidth/1440)}
+      if (i === 1) return { x: 0, y: marker.offsetTop - 35 * (windowSize.windowWidth/1440)}
+      if (i === 2) return { x: 0, y: marker.offsetTop - 44 * (windowSize.windowWidth/1440)}
+      if (i === 3) return { x: 0, y: marker.offsetTop - 68 * (windowSize.windowWidth/1440)}
+      if (i === 4) return { x: 0, y: marker.offsetTop - 94 * (windowSize.windowWidth/1440)}
+      if (i === 5) return { x: 0, y: marker.offsetTop - 118 * (windowSize.windowWidth/1440)}
     })
 
     this.setState({ defaultPositions: offsetTops })
@@ -69,8 +69,7 @@ class FretboardMatrix extends Component {
 
     return <div className='fret-matrix'>
       <WindowResizeListener onResize={(windowSize) => this.locateStringMarkers(windowSize)}/>
-      {_.times(3, (stringIndex) => {
-        console.log(this.defaultStringPositions(stringIndex))
+      {_.times(strings, (stringIndex) => {
         return <div className='matrix-string' key={stringIndex.toString()}>
           {_.times(frets, (fretIndex) => {
             return <Draggable
@@ -84,18 +83,6 @@ class FretboardMatrix extends Component {
           })}
         </div>
       })}
-{/*      <div className='matrix-string'>
-        <WindowResizeListener onResize={windowSize => {
-          console.log('Window height', windowSize.windowHeight)
-          console.log('Window width', windowSize.windowWidth)
-        }}/>
-        <Draggable
-          axis='y' {...dragHandlers}
-          bounds='parent'
-        >
-          <div className='matrix-fret' />
-        </Draggable>
-      </div>*/}
     </div>
   }
 }

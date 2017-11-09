@@ -2,19 +2,22 @@
   position: relative;
   width: calc(150% + 10px);
   background-color: #efefef;
+  margin-top: 20px;
   .string-markers {
     position: absolute;
     height: 100%;
     width: 20px;
     // background-color: red;
+    // display: none;
     left: -20px;
-    border-radius: 1px solid green;
+    // border-radius: 1px solid green;
     .string-marker {
       height: 5px;
       width: 5px;
-      background-color: red;
+      // background-color: red;
       border-radius: 2.5px; 
       visibility: hidden;
+      opacity: 0;
       position: absolute;
       &.one {
         visibility: visible;
@@ -86,20 +89,23 @@
         top: -84%;
         // visibility: hidden;
         // background-color: #dfd6b9;
-        background-color: rgba(186, 224, 205, 0.5);
+        // background-color: rgba(186, 224, 205, 0.5);
       }
       &:nth-child(4) {
         top: -122%;
         // visibility: hidden;
         // background-color: #bae0cd;
+        // background-color: rgba(186, 224, 205, 0.5);
       }
       &:nth-child(5) {
         top: -158%;
+        // background-color: rgba(186, 224, 205, 0.5);
         // visibility: hidden;
         // background-color: #b9b9df;
       }
       &:nth-child(6) {
         bottom: 200%;
+        background-color: rgba(186, 224, 205, 0.5);
         // visibility: hidden;
         // background-color: #ccb9df;
       }
