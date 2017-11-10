@@ -78,14 +78,8 @@ class GuitarString extends Component {
 
         if (lastTime != null) angle += (time - lastTime) * frequency
 
-        
-        // const y                    = 3 + (Math.sin(angle) * (0.2))
-        // const yPosition            = restingPositions[stringIndex].split(' ')[0].split(',')[1]
-
-        const yPosition = [0.5, 1, 2, 2.5, 2.7, 3.5][stringIndex]
-        const y = yPosition + (Math.sin(angle) * (gauge/0.13))
-        // const y                    = yPosition + (Math.sin(angle) * 4)
-        
+        const yPosition            = [0.5, 1, 2, 2.5, 2.7, 3.5][stringIndex]
+        const y                    = yPosition + (Math.sin(angle) * (gauge/0.13))
         const vibrateCoordinate    = `${vibrationCoordinates(yPosition)[fretPosition]},${y}`
         const coordinatesArr       = restingPositions[stringIndex].split(' ')
         const vibrateCoordinateArr = vibrateCoordinate.split(' ')

@@ -1,5 +1,28 @@
 .home-view {
-  
+  .view-slider-container {
+    position: relative;
+    width: 40%;
+    padding-bottom: 2%;
+    // border: 1px solid red;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    border-radius: 50px;
+    background-color: rgba(186, 223, 185, 0.7);
+    .view-slider {
+      position: absolute;
+      height: 100%;
+      width: 5%;
+      border-radius: 50px;
+      background-color: #b5b5b5;
+      cursor: pointer;
+    }
+  }
+  .view-box {
+    overflow: hidden;
+    padding-bottom: 5%;
+    outline: 10px solid rgba(255, 255, 255, 0.4);
+    // background-color: rgba(69, 137, 247, 0.1);
+  }
 }
 
 // fretboard h x w => 41.28/323.85
