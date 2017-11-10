@@ -1,8 +1,9 @@
 .fretboard {
   position: relative;
-  width: calc(150% + 10px);
+  width: calc(145% + 10px);
   background-color: #efefef;
   margin-top: 20px;
+  margin-left: 1.5%;
   .string-markers {
     position: absolute;
     height: 100%;
@@ -15,30 +16,12 @@
       visibility: hidden;
       opacity: 0;
       position: absolute;
-      &.one {
-        visibility: visible;
-        top: 5%;
-      }
-      &.two {
-        visibility: visible;
-        top: 22.5%;
-      }
-      &.three {
-        visibility: visible;
-        top: 39.5%;
-      }
-      &.four {
-        visibility: visible;
-        top: 57.5%;
-      }
-      &.five {
-        visibility: visible;
-        top: 74%;
-      }
-      &.six {
-        visibility: visible;
-        top: 92%;
-      }
+      &.one { top: 5%; }
+      &.two { top: 22.5%; }
+      &.three { top: 39.5%; }
+      &.four { top: 57.5%; }
+      &.five { top: 74%; }
+      &.six { top: 92%; }
     }
   }
   .nut {

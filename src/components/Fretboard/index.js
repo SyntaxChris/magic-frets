@@ -73,7 +73,12 @@ const FretPositionMarkers = () => <div className='string-markers'>
 
 
 
-export const Fretboard = ({ frets, strings }) => <div className='fretboard'>
+export const Fretboard = ({ frets, percentage, strings }) => <div
+  className='fretboard'
+  // style={{ marginLeft: '1.5%'}}
+  // style={{ marginLeft: '-47%'}}
+  style={{ marginLeft: `${1.5 + percentage * -49}%`}}
+>
   <FretPositionMarkers />
   <FretboardMatrix frets={frets} strings={strings} />
   <div className='nut' />

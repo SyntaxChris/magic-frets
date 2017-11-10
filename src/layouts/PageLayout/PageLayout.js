@@ -3,15 +3,13 @@ import { IndexLink, Link } from 'react-router'
 import PropTypes from 'prop-types'
 import './PageLayout.scss'
 
-export const PageLayout = ({ children }) => (
-  <div className='page-layout text-center'>
-    <h1>Magic Frets</h1>
-  
-    <div className='page-layout__viewport'>
-      {children}
-    </div>
+export const PageLayout = ({ children }) => <div className='page-layout'>
+  <div className='navbar'>Magic Frets</div>
+  <div className='page-content'>
+    {children}
   </div>
-)
+</div>
+
 PageLayout.propTypes = {
   children: PropTypes.node,
 }

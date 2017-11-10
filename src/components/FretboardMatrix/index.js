@@ -13,7 +13,7 @@ class FretboardMatrix extends Component {
   }
 
   onDrag (e) {
-    console.log('HANDLE DRAG', e)
+    // console.log('HANDLE DRAG', e)
   }
 
   onStart (e) {
@@ -23,7 +23,7 @@ class FretboardMatrix extends Component {
   }
 
   onStop (e) {
-    console.log(this.state)
+    // console.log(this.state)
     // this.setState({ activeDrags: --this.state.activeDrags })
   }
 
@@ -32,20 +32,8 @@ class FretboardMatrix extends Component {
     return {x: 0, y: 0}
   }
 
-  defaultPosition (stringIndex) {
-    return [
-      {x: 0, y: 0},
-      {x: 0, y: 9},
-      {x: 0, y: 33},
-      {x: 0, y: 20},
-      {x: 0, y: 25},
-      {x: 0, y: 30}
-    ][stringIndex]
-  }
-
   locateStringMarkers (windowSize) {
     const markers = document.getElementsByClassName('string-marker')
-    if (windowSize) console.log('Window width', windowSize.windowWidth)
     const offsetTops = Array.prototype.map.call(markers, (marker, i) => {
       if (i === 0) return { x: 0, y: marker.offsetTop - 9 * (windowSize.windowWidth/1440)}
       if (i === 1) return { x: 0, y: marker.offsetTop - 35 * (windowSize.windowWidth/1440)}
@@ -73,12 +61,15 @@ class FretboardMatrix extends Component {
         return <div className='matrix-string' key={stringIndex.toString()}>
           {_.times(frets, (fretIndex) => {
             return <Draggable
-              axis='y' {...dragHandlers}
+              {...dragHandlers}
+              axis='y'
               bounds='parent'
               position={this.defaultStringPositions(stringIndex)}
               key={fretIndex.toString()}
             >
-              <div className='matrix-fret' />
+              <div className='matrix-fret'>
+
+              </div>
             </Draggable>
           })}
         </div>

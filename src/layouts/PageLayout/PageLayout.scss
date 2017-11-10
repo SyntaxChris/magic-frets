@@ -1,13 +1,13 @@
 .page-layout {
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-.page-layout__viewport {
-  padding-top: 4rem;
-}
-
-.page-layout__nav-item--active {
-  font-weight: bold;
-  text-decoration: underline;
+  // padding-left: 5%;
+  // padding-right: 5%;
+  .navbar {
+    text-align: center;
+    font-size: 40px;
+  }
+  .page-content {
+    padding-top: 2rem;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
 }

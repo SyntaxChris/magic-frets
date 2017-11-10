@@ -10,14 +10,14 @@
     display: flex;
     flex-direction: row;
     &:nth-child(1) {
-      top: -2%;
+      top: -3%;
       .matrix-fret {
         background-color: #dfb9b9;
         z-index: 5;
       } 
     }
     &:nth-child(2) {
-      top: -39%;
+      top: -39.5%;
       .matrix-fret {
         background-color: #b9b9df;
         z-index: 4;
@@ -53,9 +53,16 @@
       } 
     }
     .matrix-fret {
+      position: relative;
       height: 33.33%;
       opacity: 0.8;
       cursor: pointer;
+      text-align: center;
+      svg {
+        // height: 100%;
+        // width: 100%;
+        margin: 0 auto;
+      }
       &:nth-child(1){ width: 7.48% }
       &:nth-child(2){ width: 7.06% }
       &:nth-child(3){ width: 6.67% }
