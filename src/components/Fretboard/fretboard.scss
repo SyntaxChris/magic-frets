@@ -1,6 +1,8 @@
 .fretboard {
   position: relative;
-  width: calc(145% + 10px);
+  // width: calc(145% + 10px);
+  width: 1800px;
+  height: 200px;
   background-color: #efefef;
   margin-top: 20px;
   margin-left: 1.5%;
@@ -31,6 +33,14 @@
     height: 100%;
     background-color: #d8d8d8;
     z-index: 1;
+  }
+  .frets {
+    .fret {
+      .label {
+        text-align: right;
+        left: 4%;
+      }
+    }
   }
   .fretboard-butt {
     position: absolute;
@@ -66,11 +76,12 @@
         left: 0;
       }
       .label {
-        position: absolute;
-        height: 100%;
-        width: 2%;
-        font-size: 1.4vw;
-        left: -2%;
+        // position: absolute;
+        // height: 100%;
+        // width: 2%;
+        // font-size: 1.4vw;
+        // left: -2%;
+        // text-align: right;
       }
     }
   }
