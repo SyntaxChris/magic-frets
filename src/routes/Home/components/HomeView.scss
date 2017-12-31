@@ -1,27 +1,54 @@
 .home-view {
+  position: relative;
   .view-slider-container {
     position: relative;
-    width: 40%;
-    padding-bottom: 2%;
-    // border: 1px solid red;
+    width: 400px;
+    height: 25px;
     margin: 0 auto;
     margin-bottom: 2%;
     border-radius: 50px;
     background-color: rgba(186, 223, 185, 0.7);
     .view-slider {
       position: absolute;
-      height: 100%;
-      width: 5%;
-      border-radius: 50px;
+      height: 25px;
+      width: 25px;
+      border-radius: 25px;
       background-color: #b5b5b5;
       cursor: pointer;
     }
   }
+  .string-labels {
+    position: absolute;
+    width: 30px;
+    left: 0%;
+    margin-top: 15px;
+    height: 210px;
+    padding-top: 3px;
+    .string-label {
+      flex: 1;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 3px;
+      border-radius: 35px;
+      background-color: rgb(160, 227, 160);
+      border: 1px solid rgb(116, 206, 116);
+      margin-top: 5px;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-top: 5 px;
+      }
+    }
+  }
   .view-box {
+    position: relative;
     overflow: hidden;
-    padding-bottom: 5%;
+    height: 250px;
+    width: calc(100% - 40px);
+    margin-left: 40px;
     outline: 10px solid rgba(255, 255, 255, 0.4);
-    // background-color: rgba(69, 137, 247, 0.1);
   }
 }
 

@@ -38,8 +38,12 @@ class HomeView extends Component {
       if (e.screenX >= minBound && e.screenX <= maxBound) {
         this.setState({ xPosition: e.screenX }, () => {
           const total = this.state.maxBound - this.state.minBound
+          let percentage = (e.screenX - minBound)/total
 
-          this.setState({ percentage: (e.screenX - minBound)/total })
+          if (percentage > .95) percentage = 1
+          if (percentage < .05) percentage = 0
+
+          this.setState({ percentage })
         })
       }
     }
@@ -61,6 +65,14 @@ class HomeView extends Component {
         >
           <div className='view-slider' />
         </Draggable>
+      </div>
+      <div className='string-labels'>
+        <div className='string-label'>e</div>
+        <div className='string-label'>B</div>
+        <div className='string-label'>G</div>
+        <div className='string-label'>D</div>
+        <div className='string-label'>A</div>
+        <div className='string-label'>E</div>
       </div>
       <div className='view-box'>
         <Fretboard frets={24} strings={6} percentage={this.state.percentage} />
