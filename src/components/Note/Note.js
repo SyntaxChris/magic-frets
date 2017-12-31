@@ -23,25 +23,23 @@ class PositionMarker extends Component {
 
   render () {
     const {
-      activeNotes,
+      barredFrets,
+      frettedNotes,
       fretPosition,
       stringPosition,
       tuning
     } = this.props
 
-    const {
-      barre,
-      bottom,
-      top
-    } = this.state
+    const bottom = !_.includes(barredFrets[stringPosition + 1], fretPosition)
+    const top = !_.includes(barredFrets[stringPosition - 1], fretPosition)
 
     return <div className='fret-marker-container'>
       <div className={
-        `note${_.includes(activeNotes[stringPosition], fretPosition) ? ' active' : ''}`
+        `note${_.includes(frettedNotes[stringPosition], fretPosition) ? ' active' : ''}`
       }>
         {tuning[stringPosition][fretPosition]}
       </div>
-      { barre
+      { _.includes(barredFrets[stringPosition], fretPosition)
         ? <div className={`barre${top ? ' top' : ''}${bottom ? ' bottom' : ''}`} />
         : null}
     </div>

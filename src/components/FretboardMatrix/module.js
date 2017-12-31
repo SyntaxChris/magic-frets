@@ -210,14 +210,24 @@ const initialState = {
       ]
     ]
   },
-  activeNotes: [
-    [3],
-    [3],
-    [4],
-    [5],
-    [5],
-    [3]
-  ]
+  activeNotes: {
+    frettedNotes: [
+      [3],
+      [3],
+      [4],
+      [5],
+      [5],
+      [3]
+    ],
+    barredFrets: [
+      [3],
+      [3],
+      [3],
+      [3],
+      [3],
+      [3]
+    ]
+  }
 }
 
 export default function fretboardMatrixReducer (state = initialState, action) {
