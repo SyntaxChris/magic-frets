@@ -67,12 +67,12 @@ class HomeView extends Component {
         </Draggable>
       </div>
       <div className='string-labels'>
-        <div className='string-label'></div>
-        <div className='string-label'></div>
-        <div className='string-label'></div>
-        <div className='string-label'></div>
-        <div className='string-label'></div>
-        <div className='string-label'></div>
+        <div className='string-label'>e</div>
+        <div className='string-label'>B</div>
+        <div className='string-label'>G</div>
+        <div className='string-label'>D</div>
+        <div className='string-label'>A</div>
+        <div className='string-label'>E</div>
       </div>
       <div className='view-box'>
         <Fretboard frets={24} strings={6} percentage={this.state.percentage} />

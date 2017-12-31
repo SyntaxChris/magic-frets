@@ -1,0 +1,40 @@
+.fret-marker-container {
+  position: relative;
+  .note {
+    width: 30px;
+    height: 90%;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: rgb(160, 227, 160);
+    border: 1px solid rgb(116, 206, 116);
+    margin: 0 auto;
+    margin-top: 2%;
+    padding: 3px;
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+  .barre {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: rgb(202, 242, 201);
+    margin: 0 auto;
+    top: -2.5px;
+    left: calc(50% - 18px);
+    z-index: -1;
+    &.top {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 36px;
+      border-top-right-radius: 36px;
+    }
+    &.bottom {
+      border-bottom-left-radius: 36px;
+      border-bottom-right-radius: 36px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}

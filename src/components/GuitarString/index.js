@@ -56,9 +56,6 @@ class GuitarString extends Component {
     return this.setState({ mute: true })
   }
 
-
-
-
   activateString (fretIndex) {
     const { active, gauge, stringIndex } = this.props
     let angle = 0

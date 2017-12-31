@@ -13,14 +13,14 @@
       top: -2.5%;
       .matrix-fret {
         top: 0;
-        background-color: #dfb9b9;
+        // background-color: #dfb9b9;
         z-index: 6;
       } 
     }
     &:nth-child(2) {
       top: 10%;
       .matrix-fret {
-        background-color: #b9b9df;
+        // background-color: #b9b9df;
         z-index: 5;
         top: 10%;
       } 
@@ -29,7 +29,7 @@
       top: 22.5%;
       .matrix-fret {
         top: 20%;
-        background-color: #b9cfdf;
+        // background-color: #b9cfdf;
         z-index: 4;
       } 
     }
@@ -37,7 +37,7 @@
       top: 35%;
       .matrix-fret {
         top: 30px;
-        background-color: #b9cfdf;
+        // background-color: #b9cfdf;
         z-index: 3;
       } 
     }
@@ -45,29 +45,24 @@
       top: 45.7%;
       .matrix-fret {
         top: 44%;
-        background-color: #badfb9;
+        // background-color: #badfb9;
         z-index: 2;
       } 
     }
     &:nth-child(6) {
       top: 52.5%;
       .matrix-fret {
-        top: 66.66%;
-        background-color: #dfb9b9;
+        top: 65%;
+        // background-color: #dfb9b9;
         z-index: 1;
       } 
     }
     .matrix-fret {
       position: relative;
       height: 33.33%;
-      opacity: 0.8;
-      cursor: pointer;
+      // opacity: 0.8;
+      // cursor: pointer;
       text-align: center;
-      svg {
-        // height: 100%;
-        // width: 100%;
-        margin: 0 auto;
-      }
       &:nth-child(1){ width: 7.48% }
       &:nth-child(2){ width: 7.06% }
       &:nth-child(3){ width: 6.67% }

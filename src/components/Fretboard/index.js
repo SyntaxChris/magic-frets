@@ -57,16 +57,19 @@ const FretPad = ({ fretIndex }) => {
   }
 
   return <div className='fret'>
-    <div className='label'>{fretMark}</div>
     <Marker />
+    <div className='label'>{fretMark}</div>
   </div>
 }
 
 export const Fretboard = ({ frets, percentage, strings }) => <div
   className='fretboard'
-  style={{ marginLeft: `${1.5 + percentage * -49}%`}}
+  style={{ marginLeft: `${2 + percentage * -49}%`}}
 >
-  <FretboardMatrix frets={frets} strings={strings} />
+  <FretboardMatrix
+    frets={frets}
+    strings={strings}
+  />
   <div className='nut' />
   <div className='frets'>{_.times(frets, (i) => <FretPad key={i.toString()} fretIndex={i} />)}</div>
   <div className='strings'>
