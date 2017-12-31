@@ -7,9 +7,7 @@ class PositionMarker extends Component {
     super(props)
 
     this.state = {
-      barre: false,
-      bottom: false,
-      top: false
+      showGhostNote: false
     }
   }
 
@@ -20,6 +18,10 @@ class PositionMarker extends Component {
     if (stringPosition === 0) this.setState({ top: true })
   }
 
+  handleGhostNote (showGhostNote) {
+    console.log('SHOW GHOST NOTE', showGhostNote)
+    this.setState({ showGhostNote })
+  }
 
   render () {
     const {
@@ -32,11 +34,23 @@ class PositionMarker extends Component {
 
     const bottom = !_.includes(barredFrets[stringPosition + 1], fretPosition)
     const top = !_.includes(barredFrets[stringPosition - 1], fretPosition)
-
+    const isActive = _.includes(frettedNotes[stringPosition], fretPosition)
+    // const isActive = (
+    //   tuning[stringPosition][fretPosition] === 'G' ||
+    //   tuning[stringPosition][fretPosition] === 'A' ||
+    //   tuning[stringPosition][fretPosition] === 'A#'||
+    //   tuning[stringPosition][fretPosition] === 'C' ||
+    //   tuning[stringPosition][fretPosition] === 'D' ||
+    //   tuning[stringPosition][fretPosition] === 'E' ||
+    //   tuning[stringPosition][fretPosition] === 'F' ||
+    //   tuning[stringPosition][fretPosition] === 'G' 
+    // )
     return <div className='fret-marker-container'>
-      <div className={
-        `note${_.includes(frettedNotes[stringPosition], fretPosition) ? ' active' : ''}`
-      }>
+      <div
+        className={`note${isActive ? ' active' : ''}${this.state.showGhostNote ? ' ghost' : ''}`}
+        onMouseEnter={() => this.handleGhostNote(!isActive)}
+        onMouseLeave={() => this.handleGhostNote(false)}
+      >
         {tuning[stringPosition][fretPosition]}
       </div>
       { _.includes(barredFrets[stringPosition], fretPosition)

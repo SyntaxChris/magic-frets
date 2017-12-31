@@ -10,9 +10,13 @@
     margin: 0 auto;
     margin-top: 2%;
     padding: 3px;
-    display: none;
+    opacity: 0;
     &.active {
-      display: block;
+      opacity: 1;
+    }
+    &.ghost {
+      opacity: 0.5;
+      border-style: dashed;
     }
   }
   .barre {

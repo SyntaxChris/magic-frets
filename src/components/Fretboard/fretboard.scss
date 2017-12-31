@@ -1,61 +1,119 @@
-.fretboard {
-  position: relative;
-  // width: calc(145% + 10px);
-  user-select: none;
-  width: 1800px;
-  height: 200px;
-  background-color: #efefef;
-  margin-top: 20px;
-  margin-left: 2%;
-  .nut {
-    position: absolute;
-    left: -10px;
-    width: 10px;
-    height: 100%;
-    background-color: #d8d8d8;
-    z-index: 1;
+// fretboard h x w => 41.28/323.85
+// nut to 1st => 36.3474
+// nut to 2nd => 70.6628
+
+.fretboard-container {
+  .view-slider-container {
+    position: relative;
+    width: 400px;
+    height: 25px;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    border-radius: 50px;
+    background-color: rgba(186, 223, 185, 0.7);
+    .view-slider {
+      position: absolute;
+      height: 25px;
+      width: 25px;
+      border-radius: 25px;
+      background-color: #b5b5b5;
+      cursor: pointer;
+    }
   }
-  .frets {
-    .fret {
-      .label {
-        text-align: center;
-        left: 4%;
-        font-size: 18px;
+  .string-labels {
+    position: absolute;
+    width: 30px;
+    left: 0%;
+    margin-top: 15px;
+    height: 210px;
+    padding-top: 3px;
+    .string-label {
+      flex: 1;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding: 3px;
+      margin-top: 5px;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-top: 5 px;
+      }
+      &.active {
+        border-radius: 35px;
+        background-color: rgb(160, 227, 160);
+        border: 1px solid rgb(116, 206, 116);
       }
     }
   }
-  .fretboard-butt {
-    position: absolute;
-    right: -15px;
-    top: 0;
-    width: 15px;
-    height: 100%;
-    background-color: #efefef;
-    // z-index: 1;
-    border-radius: 0 10px 10px 0;
+  .view-box {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    outline: 10px solid rgba(255, 255, 255, 0.4);
   }
-  .strings {
-    position: absolute;
-    top: 0;
-    left: -15px;
-    z-index: 2;
-    width: calc(100% + 40px);
-    height: 100%;
-    .string {
-      position: relative;
-      height: 50%;
-      width: 100%;
-      &:nth-child(1) { top: -0%; }
-      &:nth-child(2) { top: -39%; }
-      &:nth-child(3) { top: -84%; }
-      &:nth-child(4) { top: -122%; }
-      &:nth-child(5) { top: -158%; }
-      &:nth-child(6) { bottom: 200%; }
-      svg {
-        position: absolute; 
+  .fretboard {
+    position: relative;
+    // width: calc(145% + 10px);
+    user-select: none;
+    width: 1800px;
+    height: 200px;
+    background-color: #efefef;
+    margin-top: 20px;
+    margin-left: 2%;
+    .nut {
+      position: absolute;
+      left: -10px;
+      width: 10px;
+      height: 100%;
+      background-color: #d8d8d8;
+      z-index: 1;
+    }
+    .frets {
+      .fret {
+        .label {
+          text-align: center;
+          left: 4%;
+          font-size: 18px;
+        }
+      }
+    }
+    .fretboard-butt {
+      position: absolute;
+      right: -15px;
+      top: 0;
+      width: 15px;
+      height: 100%;
+      background-color: #efefef;
+      // z-index: 1;
+      border-radius: 0 10px 10px 0;
+    }
+    .strings {
+      position: absolute;
+      top: 0;
+      left: -15px;
+      z-index: 2;
+      width: calc(100% + 40px);
+      height: 100%;
+      .string {
+        position: relative;
+        height: 50%;
         width: 100%;
-        height: 100%;
-        left: 0;
+        &:nth-child(1) { top: -0%; }
+        &:nth-child(2) { top: -39%; }
+        &:nth-child(3) { top: -84%; }
+        &:nth-child(4) { top: -122%; }
+        &:nth-child(5) { top: -158%; }
+        &:nth-child(6) { bottom: 200%; }
+        svg {
+          position: absolute; 
+          width: 100%;
+          height: 100%;
+          left: 0;
+        }
       }
     }
   }
