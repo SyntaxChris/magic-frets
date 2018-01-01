@@ -16,15 +16,19 @@ class PositionMarker extends Component {
   componentWillMount () {
     const { frettedNotes, fretPosition, stringPosition } = this.props
 
-    if (stringPosition === 5) this.setState({ bottom: true })
-    if (stringPosition === 0) this.setState({ top: true })
-    console.log('FRETTED NOTES', frettedNotes)
     if (frettedNotes[stringPosition]) {
       this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
     }      
-    // if (frettedNotes) {
-    //   this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
-    // }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { frettedNotes, fretPosition, stringPosition } = nextProps
+
+    if (frettedNotes[stringPosition]) {
+      return this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+    }
+
+    return this.setState({ active: false })
   }
 
   handleGhostNote (showGhostNote) {
