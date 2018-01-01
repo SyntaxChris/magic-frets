@@ -18,21 +18,17 @@ class PositionMarker extends Component {
 
     if (stringPosition === 5) this.setState({ bottom: true })
     if (stringPosition === 0) this.setState({ top: true })
-
-    this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+    console.log('FRETTED NOTES', frettedNotes)
+    if (frettedNotes[stringPosition]) {
+      this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+    }      
+    // if (frettedNotes) {
+    //   this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+    // }
   }
 
   handleGhostNote (showGhostNote) {
-    this.setState({
-      noteValue: showGhostNote
-        ? this.state.noteValue
-        : this.props.tuning[this.props.stringPosition][this.props.fretPosition],
-      showGhostNote
-    })
-  }
-
-  handleNoteValue (noteValue) {
-    this.setState({ noteValue })
+    this.setState({ showGhostNote })
   }
 
   render () {
@@ -60,10 +56,10 @@ class PositionMarker extends Component {
     return <div className='fret-marker-container'>
       <div
         className={`note${this.state.active ? ' active' : ''}${this.state.showGhostNote ? ' ghost' : ''}`}
-        onMouseEnter={() => this.handleGhostNote(!isActive)}
+        onMouseEnter={() => this.handleGhostNote(!this.state.active)}
         onMouseLeave={() => this.handleGhostNote(false)}
-        onMouseDown={() => this.handleNoteValue(frettedNotes[stringPosition][1] || tuning[stringPosition][fretPosition])}
-        onMouseUp={() => this.handleNoteValue(tuning[stringPosition][fretPosition])}
+        onMouseDown={() => null}
+        onMouseUp={() => null}
       >
         {this.state.noteValue}
       </div>

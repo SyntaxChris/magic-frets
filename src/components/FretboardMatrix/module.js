@@ -213,12 +213,12 @@ const initialState = {
   activeNotes: {
     frettedNotes: [
       // index 0 = fret position, index 1 = finger position
-      [3, 1],
-      [3, 1],
-      [4, 2],
-      [5, 3],
-      [5, 4],
-      [3, 1]
+      // [3, 1],
+      // [3, 1],
+      // [4, 2],
+      // [5, 3],
+      // [5, 4],
+      // [3, 1]
     ],
     barredFrets: [
       // [3],
