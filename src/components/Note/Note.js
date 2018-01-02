@@ -1,16 +1,25 @@
 import _ from 'lodash'
+import Pizzicato from 'pizzicato'
 import React, { Component } from 'react'
 import './note.scss'
 
-class PositionMarker extends Component {
+class Note extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       active: false,
-      showGhostNote: false,
-      noteValue: this.props.tuning[this.props.stringPosition][this.props.fretPosition]
+      playNote: false,
+      noteValue: this.props.tuning[this.props.stringPosition][this.props.fretPosition].value,
+      showGhostNote: false
     }
+
+    this.sound = new Pizzicato.Sound({ 
+      source: 'wave', 
+      options: {
+          frequency: this.props.tuning[this.props.stringPosition][this.props.fretPosition].frequency
+      }
+    })
   }
 
   componentWillMount () {
@@ -31,6 +40,17 @@ class PositionMarker extends Component {
     return this.setState({ active: false })
   }
 
+  handleActiveNote (playNote) {
+    if (!this.state.active) {
+      this.setState({
+        playNote,
+        showGhostNote: !playNote
+      })
+    }
+
+    playNote ? this.sound.play() : this.sound.stop()
+  }
+
   handleGhostNote (showGhostNote) {
     this.setState({ showGhostNote })
   }
@@ -40,38 +60,24 @@ class PositionMarker extends Component {
       barredFrets,
       frettedNotes,
       fretPosition,
-      stringPosition,
-      tuning
+      stringPosition
     } = this.props
 
-    // const bottom = barredFrets[stringPosition + 1][0] !== fretPosition
-    // const top = barredFrets[stringPosition - 1][0] !== fretPosition
+    const isActive = frettedNotes[stringPosition][0] === fretPosition
+    // return null
 
-    // const isActive = (
-    //   tuning[stringPosition][fretPosition] === 'G' ||
-    //   tuning[stringPosition][fretPosition] === 'A' ||
-    //   tuning[stringPosition][fretPosition] === 'A#'||
-    //   tuning[stringPosition][fretPosition] === 'C' ||
-    //   tuning[stringPosition][fretPosition] === 'D' ||
-    //   tuning[stringPosition][fretPosition] === 'E' ||
-    //   tuning[stringPosition][fretPosition] === 'F' ||
-    //   tuning[stringPosition][fretPosition] === 'G' 
-    // )
     return <div className='fret-marker-container'>
       <div
-        className={`note${this.state.active ? ' active' : ''}${this.state.showGhostNote ? ' ghost' : ''}`}
+        className={`note${isActive || this.state.playNote ? ' active' : ''}${this.state.showGhostNote ? ' ghost' : ''}`}
         onMouseEnter={() => this.handleGhostNote(!this.state.active)}
         onMouseLeave={() => this.handleGhostNote(false)}
-        onMouseDown={() => null}
-        onMouseUp={() => null}
+        onMouseDown={() => this.handleActiveNote(true)}
+        onMouseUp={() => this.handleActiveNote(false)}
       >
         {this.state.noteValue}
       </div>
-      { _.includes(barredFrets[stringPosition], fretPosition)
-        ? <div className={`barre${top ? ' top' : ''}${bottom ? ' bottom' : ''}`} />
-        : null}
     </div>
   }
 }
 
-export default PositionMarker
+export default Note

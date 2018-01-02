@@ -113,7 +113,7 @@ class Fretboard extends Component {
     const openStrings = []
 
     this.props.tuning.forEach((string) => {
-      openStrings.push(string[0])
+      openStrings.push(string[0].value)
     })
 
     if (openStrings[0] === openStrings[openStrings.length - 1]) {
