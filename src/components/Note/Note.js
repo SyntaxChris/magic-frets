@@ -1,32 +1,40 @@
 import _ from 'lodash'
-import Pizzicato from 'pizzicato'
+import { Howl } from 'howler'
 import React, { Component } from 'react'
+import audio from '../../audio/tuning/E.mp3'  
 import './note.scss'
 
 class Note extends Component {
   constructor (props) {
     super(props)
 
+    const { fretPosition, stringPosition, tuning } = this.props
+    const { frequency } = tuning[stringPosition][fretPosition]
+    const openFrequency = tuning[stringPosition][0].frequency
+    const rate = frequency/openFrequency
+
     this.state = {
-      active: false,
-      playNote: false,
-      noteValue: this.props.tuning[this.props.stringPosition][this.props.fretPosition].value,
+      selected: false,
+      noteValue: tuning[stringPosition][fretPosition].value,
       showGhostNote: false
     }
 
-    this.sound = new Pizzicato.Sound({ 
-      source: 'wave', 
-      options: {
-          frequency: this.props.tuning[this.props.stringPosition][this.props.fretPosition].frequency
+    this.sound = new Howl({
+      rate,
+      src: [audio],
+      sprite: {
+        trim: [400, 5000]
       }
     })
   }
 
   componentWillMount () {
-    const { frettedNotes, fretPosition, stringPosition } = this.props
-
+    const { frettedNotes, fretPosition, stringPosition, tuning } = this.props
+    
     if (frettedNotes[stringPosition]) {
-      this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+      this.setState({
+        selected: frettedNotes[stringPosition][0] === fretPosition || fretPosition === 0
+      })
     }      
   }
 
@@ -34,25 +42,23 @@ class Note extends Component {
     const { frettedNotes, fretPosition, stringPosition } = nextProps
 
     if (frettedNotes[stringPosition]) {
-      return this.setState({ active: frettedNotes[stringPosition][0] === fretPosition })
+      return this.setState({ selected: frettedNotes[stringPosition][0] === fretPosition })
     }
 
-    return this.setState({ active: false })
+    return this.setState({ selected: false })
   }
 
   handleActiveNote (playNote) {
-    if (!this.state.active) {
-      this.setState({
-        playNote,
-        showGhostNote: !playNote
-      })
-    }
+    playNote ? this.sound.play('trim') : this.sound.stop()
 
-    playNote ? this.sound.play() : this.sound.stop()
+    if (!this.state.active) {
+      this.setState({ showGhostNote: !playNote && !this.props.root })
+    }
   }
 
   handleGhostNote (showGhostNote) {
-    this.setState({ showGhostNote })
+    this.sound.stop()
+    this.setState({ showGhostNote }) 
   }
 
   render () {
@@ -63,13 +69,21 @@ class Note extends Component {
       stringPosition
     } = this.props
 
-    const isActive = frettedNotes[stringPosition][0] === fretPosition
-    // return null
-
+    const isSelected = (frettedNotes[stringPosition][0] === fretPosition)
+  
     return <div className='fret-marker-container'>
       <div
-        className={`note${isActive || this.state.playNote ? ' active' : ''}${this.state.showGhostNote ? ' ghost' : ''}`}
-        onMouseEnter={() => this.handleGhostNote(!this.state.active)}
+        className={
+          `note${
+            this.props.root ? ' root' : ''
+          }${
+            isSelected ? ' selected' : ''
+          }${
+            this.sound.playing() ? ' active' : ''
+          }${
+            this.state.showGhostNote ? ' ghost' : ''
+          }`}
+        onMouseEnter={() => this.handleGhostNote(!this.state.selected)}
         onMouseLeave={() => this.handleGhostNote(false)}
         onMouseDown={() => this.handleActiveNote(true)}
         onMouseUp={() => this.handleActiveNote(false)}

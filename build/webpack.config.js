@@ -136,6 +136,16 @@ config.module.rules.push({
 })
 config.plugins.push(extractStyles)
 
+// Audio
+// ------------------------------------
+config.module.rules.push({
+  test: /\.mp3$/,
+  loader: 'file-loader',
+  query: {
+    name: 'static/media/[name].[hash:8].[ext]'
+  }
+})
+
 // Images
 // ------------------------------------
 config.module.rules.push({
