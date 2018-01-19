@@ -1,16 +1,17 @@
 .page-layout {
-  // padding-left: 5%;
-  // padding-right: 5%;
   background-color: #000;
   height: 100vh;
   .navbar {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
     font-size: 40px;
     color: #fff;
-    // background-color: rgb(53, 53, 53);
+    .logo {
+      display: flex;
+      padding: 10px;
+    }
   }
   .page-content {
-    padding-top: 2rem;
     padding-left: 4%;
     padding-right: 4%;
   }

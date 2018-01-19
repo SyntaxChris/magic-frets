@@ -1,3 +1,8 @@
 .home-view {
   position: relative;
+  .video-container {
+    width: 50%;
+    margin: 0 auto;
+    // transform: rotateY(180deg);
+  }
 }

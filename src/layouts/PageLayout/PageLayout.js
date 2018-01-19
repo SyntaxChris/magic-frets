@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import './PageLayout.scss'
 
 export const PageLayout = ({ children }) => <div className='page-layout'>
-  <div className='navbar'>Magic Frets</div>
+  <div className='navbar'>
+    <div className='logo'>Magic Frets</div>
+  </div>
   <div className='page-content'>
     {children}
   </div>
