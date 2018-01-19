@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Draggable from 'react-draggable'
 import FretboardMatrix from '../FretboardMatrix'
 import GuitarString from '../GuitarString'
+import Note from '../Note'
 import React, { Component } from 'react'
 import './fretboard.scss'
 
@@ -116,8 +117,8 @@ class Fretboard extends Component {
       openStrings.push(string[0])
     })
 
-    if (openStrings[0] === openStrings[openStrings.length - 1]) {
-      openStrings[0] = openStrings[0].toLowerCase()
+    if (openStrings[0].value === openStrings[openStrings.length - 1].value) {
+      openStrings[0].value = openStrings[0].value.toLowerCase()
     }
 
     return openStrings
@@ -146,12 +147,12 @@ class Fretboard extends Component {
 
       <div className='string-labels'>
         {this.openStrings().map((val, i) => {
-          return <div
-            className={`string-label${_.includes(frettedNotes[i], 0) ? ' active' : ''}`}
+          return <Note
+            root={true}
+            fretPosition={0}
             key={i.toString()}
-          >
-            {val}
-          </div>
+            stringPosition={i}
+          />
         })}
       </div>
 

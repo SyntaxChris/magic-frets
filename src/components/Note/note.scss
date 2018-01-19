@@ -1,22 +1,37 @@
 .fret-marker-container {
   position: relative;
+  text-align: center;
   .note {
     width: 30px;
     height: 90%;
     border-radius: 30px;
     cursor: pointer;
-    background-color: rgb(160, 227, 160);
-    border: 1px solid rgb(116, 206, 116);
+    // background-color: rgb(160, 227, 160);
+    // background-color: #fff;
+    background-color: rgb(190, 226, 190);
+    // border: 1px solid rgb(190, 226, 190);
     margin: 0 auto;
     margin-top: 2%;
     padding: 3px;
     opacity: 0;
-    &.active {
+    &.root {
+      border: none;
+      // background-color: red; 
+      opacity: 1;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+    &.selected {
       opacity: 1;
     }
+    &.active {
+      opacity: 1;
+      background-color: rgb(160, 227, 160);
+    }
     &.ghost {
-      opacity: 0.5;
-      border-style: dashed;
+      opacity: 0.7;
+      background-color: rgb(201, 92, 92);
+      // border-style: dashed;
     }
   }
   .barre {
