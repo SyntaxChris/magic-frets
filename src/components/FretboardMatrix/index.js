@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import FretboardMatrix from './FretboardMatrix'
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = {}
 
 const mapStateToProps = (state) => {
   return {

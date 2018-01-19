@@ -1,17 +1,19 @@
 import _ from 'lodash'
 import { Howl } from 'howler'
 import React, { Component } from 'react'
-import audio from '../../audio/tuning/E.mp3'  
+import { stringTuning } from '../../audio/config' 
 import './note.scss'
 
 class Note extends Component {
   constructor (props) {
     super(props)
 
-    const { fretPosition, stringPosition, tuning } = this.props
+    const { currentTuning, fretPosition, stringPosition, tuning } = this.props
     const { frequency } = tuning[stringPosition][fretPosition]
     const openFrequency = tuning[stringPosition][0].frequency
     const rate = frequency/openFrequency
+
+    const audio = stringTuning[currentTuning][stringPosition]
 
     this.state = {
       selected: false,
@@ -23,14 +25,19 @@ class Note extends Component {
       rate,
       src: [audio],
       sprite: {
-        trim: [400, 5000]
+        trim: [0, 5000]
       }
     })
   }
 
   componentWillMount () {
-    const { frettedNotes, fretPosition, stringPosition, tuning } = this.props
-    
+    const {
+      frettedNotes,
+      fretPosition,
+      stringPosition,
+      tuning
+    } = this.props
+
     if (frettedNotes[stringPosition]) {
       this.setState({
         selected: frettedNotes[stringPosition][0] === fretPosition || fretPosition === 0
@@ -82,7 +89,8 @@ class Note extends Component {
             this.sound.playing() ? ' active' : ''
           }${
             this.state.showGhostNote ? ' ghost' : ''
-          }`}
+          }`
+        }
         onMouseEnter={() => this.handleGhostNote(!this.state.selected)}
         onMouseLeave={() => this.handleGhostNote(false)}
         onMouseDown={() => this.handleActiveNote(true)}

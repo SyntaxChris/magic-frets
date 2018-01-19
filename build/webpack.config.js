@@ -142,7 +142,7 @@ config.module.rules.push({
   test: /\.mp3$/,
   loader: 'file-loader',
   query: {
-    name: 'static/media/[name].[hash:8].[ext]'
+    name: 'audio/[name].[hash:8].[ext]'
   }
 })
 

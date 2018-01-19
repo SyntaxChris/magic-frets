@@ -147,12 +147,6 @@ class Fretboard extends Component {
 
       <div className='string-labels'>
         {this.openStrings().map((val, i) => {
-          // return <div
-          //   className={`string-label${_.includes(frettedNotes[i], 0) ? ' active' : ''}`}
-          //   key={i.toString()}
-          // >
-          //   {val}
-          // </div>
           return <Note
             root={true}
             fretPosition={0}
